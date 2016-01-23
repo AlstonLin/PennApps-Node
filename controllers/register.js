@@ -25,7 +25,7 @@ exports.register = function(email, password, name, callback) {
         if (err){
           callback({'response' : "An Error Occurred", 'Error' : err});
         } else{
-          callback({'response' : "Sucessfully Registered"});
+          callback({'response' : "Successfully Registered", 'success' : true});
         }
       });
     } else{
