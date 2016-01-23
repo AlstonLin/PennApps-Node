@@ -8,8 +8,6 @@ var requestSchema = mongoose.Schema({
   claim_code : String,
   claimed : Boolean,
   owner : {type : mongoose.Schema.Types.ObjectId, ref: 'User'},
-  locker : {type : mongoose.Schema.Types.ObjectId, ref: 'User'},
-  chats : [{type : mongoose.Schema.Types.ObjectId, ref: 'Chat'}],
-  completions : [{type : mongoose.Schema.Types.ObjectId, ref: 'Completion'}]
+  locker : {type : mongoose.Schema.Types.ObjectId, ref: 'User'}
 });
 module.exports = mongoose.model('Request', requestSchema);

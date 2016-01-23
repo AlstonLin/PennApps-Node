@@ -2,7 +2,7 @@ var crypto = require('crypto');
 var User = require('../models/user');
 
 exports.login = function(email,password,callback) {
-  User.find({email: email}, function(err,users){
+  User.find({email: email}, function(err, users){
     if (users.length != 0){
       var temp = users[0].salt;
       var hash_db = users[0].hashed_password;

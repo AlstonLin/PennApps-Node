@@ -1,16 +1,16 @@
 var claimRequest = require('./controllers/claim_request');
 var lockRequest = require('./controllers/lock_request');
 var login = require('./controllers/login');
+var newChat = require('./controllers/new_chat');
 var newCompletion = require('./controllers/new_completion');
 var newMsg = require('./controllers/new_msg');
 var newRequest = require('./controllers/new_request');
 var postChats = require('./controllers/post_chats');
 var posts = require('./controllers/posts');
 var register = require('./controllers/register');
-var request_chats = require('./controllers/request_chats');
+var requestChats = require('./controllers/request_chats');
 var requests = require('./controllers/requests');
 var respondCompletion = require('./controllers/respond_completion');
-var showChat = require('./controllers/show_chat');
 
 var User = require('./models/user');
 
@@ -61,6 +61,23 @@ module.exports = function(app) {
     login.login(email,password,function (found) {
       console.log(found);
       res.json(found);
+    });
+  });
+  app.post('/new_chat', function(req,res){
+    var email = req.body.email;
+    var token = req.body.token;
+    validateUser(email, token, function(valid){
+      if (valid){
+        var requestId = req.body.request_id;
+        var responderId = req.body.responder_id;
+        var posterId = req.body.poster_id;
+        newChat.newChat(posterId, responderId, requestId, function (found) {
+          console.log(found);
+          res.json(found);
+        });
+      } else {
+        res.json({'response' : "Bad Token", 'res' : false});
+      }
     });
   });
   app.post('/new_completion', function(req,res){
@@ -186,21 +203,6 @@ module.exports = function(app) {
         var requestId = req.body.request_id;
         var accepted = req.body.accepted;
         respondCompletion.respondCompletion(requestId, accepted, function (found) {
-          console.log(found);
-          res.json(found);
-        });
-      } else {
-        res.json({'response' : "Bad Token", 'res' : false});
-      }
-    });
-  });
-  app.post('/show_chat', function(req,res){
-    var email = req.body.email;
-    var token = req.body.token;
-    validateUser(email, token, function(valid){
-      if (valid){
-        var chatId = req.body.chat_id;
-        showChat.showChat(chatId, function (found) {
           console.log(found);
           res.json(found);
         });

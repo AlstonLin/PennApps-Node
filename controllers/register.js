@@ -14,6 +14,8 @@ exports.register = function(email, password, name, callback) {
     token : token,
     email : email,
     hashed_password : hashed_password,
+    chats_request : [],
+    chats_post : [],
     salt : temp });
 
   User.find({email : email},function(err,users){

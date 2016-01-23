@@ -1,4 +1,5 @@
 var Request = require('../models/request');
+var User = require('../models/user');
 
 exports.newRequest = function(owner, name, fee, location, callback) {
   var newRequest = new Request({

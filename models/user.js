@@ -9,8 +9,5 @@ var userSchema = mongoose.Schema({
   temp_str : String,
   locked : Boolean,
   lock : {type : mongoose.Schema.Types.ObjectId, ref: 'Request'},
-  requests : [{type : mongoose.Schema.Types.ObjectId, ref : 'Request'}],
-  chats : [{type : mongoose.Schema.Types.ObjectId, ref : 'Chat'}],
-  completions : [{type : mongoose.Schema.Types.ObjectId, ref : 'Completion'}]
 });
 module.exports = mongoose.model('User', userSchema);
