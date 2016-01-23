@@ -10,6 +10,6 @@ var requestSchema = mongoose.Schema({
   owner : {type : mongoose.Schema.Types.ObjectId, ref: 'User'},
   locker : {type : mongoose.Schema.Types.ObjectId, ref: 'User'},
   chats : [{type : mongoose.Schema.Types.ObjectId, ref: 'Chat'}],
-  completions [{type : mongoose.Schema.Types.ObjectId, ref: 'Completion'}]
+  completions : [{type : mongoose.Schema.Types.ObjectId, ref: 'Completion'}]
 });
 module.exports = mongoose.model('Request', requestSchema);
