@@ -6,8 +6,6 @@ var userSchema = mongoose.Schema({
   email : String,
   hashed_password : String,
   salt : String,
-  temp_str : String,
-  locked : Boolean,
-  lock : {type : mongoose.Schema.Types.ObjectId, ref: 'Request'},
+  temp_str : String
 });
 module.exports = mongoose.model('User', userSchema);

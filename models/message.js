@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var messageSchema = mongoose.Schema({
   content : String,
+  responded : Boolean,
   chat : {type : mongoose.Schema.Types.ObjectId, ref: 'Chat'},
   from : {type : mongoose.Schema.Types.ObjectId, ref: 'User'}
 });

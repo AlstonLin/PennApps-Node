@@ -4,6 +4,7 @@ var completionSchema = mongoose.Schema({
   image : String,
   user : {type : mongoose.Schema.Types.ObjectId, ref: 'User'},
   request : {type : mongoose.Schema.Types.ObjectId, ref: 'Request'},
-  rejected : Boolean
+  rejected : Boolean,
+  viewed : Boolean
 });
 module.exports = mongoose.model('Completion', completionSchema);

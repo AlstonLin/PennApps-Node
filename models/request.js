@@ -5,6 +5,7 @@ var requestSchema = mongoose.Schema({
   fee : Number,
   name : String,
   location : String,
+  locked : Boolean,
   claim_code : String,
   claimed : Boolean,
   owner : {type : mongoose.Schema.Types.ObjectId, ref: 'User'},

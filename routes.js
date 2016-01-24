@@ -11,6 +11,7 @@ var register = require('./controllers/register');
 var requestChats = require('./controllers/request_chats');
 var requests = require('./controllers/requests');
 var respondCompletion = require('./controllers/respond_completion');
+var getCompletion = require('./controllers/completions');
 
 var User = require('./models/user');
 
@@ -86,7 +87,8 @@ module.exports = function(app) {
     validateUser(email, token, function(valid){
       if (valid){
         var request_id = req.body.request_id;
-        newCompletion.newCompletion(email, request_id, function (found) {
+        var image = req.body.image;
+        newCompletion.newCompletion(email, request_id, image, function (found) {
           console.log(found);
           res.json(found);
         });
@@ -200,9 +202,24 @@ module.exports = function(app) {
     var token = req.body.token;
     validateUser(email, token, function(valid){
       if (valid){
-        var requestId = req.body.request_id;
+        var completionId = req.body.completion_id;
         var accepted = req.body.accepted;
-        respondCompletion.respondCompletion(requestId, accepted, function (found) {
+        respondCompletion.respondCompletion(completionId, accepted, function (found) {
+          console.log(found);
+          res.json(found);
+        });
+      } else {
+        res.json({'response' : "Bad Token", 'res' : false});
+      }
+    });
+  });
+  app.post('/completions', function(req,res){
+    var email = req.body.email;
+    var token = req.body.token;
+    validateUser(email, token, function(valid){
+      if (valid){
+        var requestId = req.body.request_id;
+        getCompletion.getCompletion(requestId, function (found) {
           console.log(found);
           res.json(found);
         });

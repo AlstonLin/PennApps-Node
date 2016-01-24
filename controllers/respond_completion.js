@@ -1,4 +1,9 @@
-  var Completion = require('../models/completion');
+var Completion = require('../models/completion');
 
-exports.respondCompletion = function(requestId, accepted, callback) {
+exports.respondCompletion = function(completionId, accepted, callback) {
+  Completion.findOne(completionId, function(err, completion){
+    completion.rejected = !accepted,
+    completion.viewed = true,
+    completion.save();
+  });
 };
