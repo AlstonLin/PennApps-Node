@@ -5,10 +5,9 @@ var newChat = require('./controllers/new_chat');
 var newCompletion = require('./controllers/new_completion');
 var newMsg = require('./controllers/new_msg');
 var newRequest = require('./controllers/new_request');
-var postChats = require('./controllers/post_chats');
+var chats = require('./controllers/chats');
 var posts = require('./controllers/posts');
 var register = require('./controllers/register');
-var requestChats = require('./controllers/request_chats');
 var requests = require('./controllers/requests');
 var respondCompletion = require('./controllers/respond_completion');
 var getCompletion = require('./controllers/completions');
@@ -70,9 +69,7 @@ module.exports = function(app) {
     validateUser(email, token, function(valid){
       if (valid){
         var requestId = req.body.request_id;
-        var responderId = req.body.responder_id;
-        var posterId = req.body.poster_id;
-        newChat.newChat(posterId, responderId, requestId, function (found) {
+        newChat.newChat(email, requestId, function (found) {
           console.log(found);
           res.json(found);
         });
@@ -132,12 +129,13 @@ module.exports = function(app) {
       }
     });
   });
-  app.post('/post_chats', function(req,res){
+  app.post('/chats', function(req,res){
     var email = req.body.email;
     var token = req.body.token;
     validateUser(email, token, function(valid){
       if (valid){
-        postChats.getPostChats(email, function (found) {
+        var requestId = req.body.request_id;
+        chats.getChats(email, requestId, function (found) {
           console.log(found);
           res.json(found);
         });
