@@ -12,11 +12,11 @@ exports.newMsg = function(email, chatId, content, callback) {
       })
       newMessage.save(function(err){
         if (err){
-          callback({'response' : "An Error Occurred", 'Error' : err});
+          callback({'response' : "An Error Occurred", 'Error' : err, "res" : false});
         } else{
           chat.messages.push(newMessage);
           chat.save();
-          callback({'response' : "Sucessfully Created"});
+          callback({'response' : "Sucessfully Created", "res" : true});
         }
       });
     });

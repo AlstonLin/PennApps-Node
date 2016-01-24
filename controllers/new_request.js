@@ -16,9 +16,9 @@ exports.newRequest = function(owner, name, fee, location, callback) {
   });
   newRequest.save(function(err){
     if (err){
-      callback({'response' : "An Error Occurred", 'Error' : err});
+      callback({'response' : "An Error Occurred", 'Error' : err, "res" : false});
     } else{
-      callback({'response' : "Sucessfully Created"});
+      callback({'response' : "Sucessfully Created", "res" : true});
     }
   })
 };

@@ -12,13 +12,13 @@ exports.newChat = function(posterId, responderId, requestId, callback) {
         });
         newChat.save(function (err) {
           if (err){
-            callback({'response' : "An Error Occurred", 'Error' : err});
+            callback({'response' : "An Error Occurred", 'Error' : err, "res" : false});
           } else{
             poster.chats_post.push(newChat);
             responder.chats_request.push(newChat);
             poster.save();
             responder.save();
-            callback({'response' : "Sucessfully Created"});
+            callback({'response' : "Sucessfully Created", "res" : true});
           }
         });
       });
