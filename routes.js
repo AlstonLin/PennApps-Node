@@ -187,7 +187,7 @@ module.exports = function(app) {
     var token = req.body.token;
     validateUser(email, token, function(valid){
       if (valid){
-        requests.getRequests(function (found) {
+        requests.getRequests(email, function (found) {
           console.log(found);
           res.json(found);
         });
