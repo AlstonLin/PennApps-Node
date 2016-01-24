@@ -11,7 +11,7 @@ var register = require('./controllers/register');
 var requests = require('./controllers/requests');
 var respondCompletion = require('./controllers/respond_completion');
 var getCompletion = require('./controllers/completions');
-var getRequestMessages = require('./controllers/request_messages');
+var getRequestMessages = require('./controllers/request_msgs');
 
 var User = require('./models/user');
 
