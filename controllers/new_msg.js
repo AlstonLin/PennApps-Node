@@ -14,8 +14,6 @@ exports.newMsg = function(email, requestId, content, callback) {
         if (err){
           callback({'response' : "An Error Occurred", 'Error' : err, "res" : false});
         } else{
-          chat.messages.push(newMessage);
-          chat.save();
           callback({'response' : "Sucessfully Created", "res" : true});
         }
       });
