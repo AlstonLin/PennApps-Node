@@ -4,6 +4,7 @@ var messageSchema = mongoose.Schema({
   content : String,
   responded : Boolean,
   chat : {type : mongoose.Schema.Types.ObjectId, ref: 'Chat'},
+  request : {type : mongoose.Schema.Types.ObjectId, ref: 'Request'},
   from : {type : mongoose.Schema.Types.ObjectId, ref: 'User'}
 });
 module.exports = mongoose.model('Message', messageSchema);

@@ -1,15 +1,15 @@
 var Message = require('../models/message');
-var Chat = require('../models/chat');
+var Request = require('../models/request');
 var User = require('../models/user');
 
-exports.newMsg = function(email, chatId, content, callback) {
+exports.newMsg = function(email, requestId, content, callback) {
   User.findOne({email : email}, function(err, user){
-    Chat.findOne(chatId, function(err, chat){
+    Request.findOne(requestId, function(err, req){
       var newMessage = new Message({
-        from : user,
-        chat : chat,
+        from : user.name,
+        request : req,
         content : content
-      })
+      });
       newMessage.save(function(err){
         if (err){
           callback({'response' : "An Error Occurred", 'Error' : err, "res" : false});
